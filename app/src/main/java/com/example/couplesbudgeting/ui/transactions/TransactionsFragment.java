@@ -1,37 +1,38 @@
 package com.example.couplesbudgeting.ui.transactions;
 
+import androidx.lifecycle.ViewModelProvider;
+
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
-
-import com.example.couplesbudgeting.databinding.FragmentHomeBinding;
+import com.example.couplesbudgeting.R;
 
 public class TransactionsFragment extends Fragment {
 
-    private FragmentHomeBinding binding;
+    private TransactionsViewModel mViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        TransactionsViewModel transactionsViewModel =
-                new ViewModelProvider(this).get(TransactionsViewModel.class);
-
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textHome;
-        transactionsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return root;
+    public static TransactionsFragment newInstance() {
+        return new TransactionsFragment();
     }
 
     @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_transactions, container, false);
     }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        mViewModel = new ViewModelProvider(this).get(TransactionsViewModel.class);
+        // TODO: Use the ViewModel
+    }
+
 }
