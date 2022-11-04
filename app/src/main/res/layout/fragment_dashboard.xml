@@ -8,110 +8,131 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Blue"
-    android:gravity="center"
     android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".ui.dashboard.DashboardFragment">
 
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_weight="2"
-        android:fontFamily="@font/fira_sans_extrabold"
-        android:text="TextView"
-        android:textAlignment="center"
-        android:textColor="@color/Dark_Pistachio"
-        android:textSize="70sp"
-        tools:text="Bouple" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="4"
-        app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="50dp"
-        app:cardElevation="3dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true"
-        app:contentPadding="10dp">
+        android:clipToPadding="false"
+        android:fillViewport="true"
+        android:scrollbarStyle="outsideInset">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="2"
                 android:fontFamily="@font/fira_sans_extrabold"
-                android:text="Transactions"
+                android:text="Bouple"
                 android:textAlignment="center"
-                android:textColor="@color/Blue"
-                android:textSize="48sp" />
+                android:textColor="@color/Dark_Pistachio"
+                android:textSize="70sp" />
 
-            <ImageButton
-                android:id="@+id/imageButton3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/white"
-                tools:src="@drawable/pop" />
-
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:background="@color/white"
-        android:fontFamily="@font/fira_sans_extrabold"
-        android:text="Button"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        tools:text="Add Transaction" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="4"
-        app:cardCornerRadius="50dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="true">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <TextView
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Transactions_Card"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/fira_sans_extrabold"
-                android:text="Goals"
-                android:textAlignment="center"
-                android:textColor="@color/Blue"
-                android:textSize="48sp" />
+                android:layout_weight="4"
+                android:clickable="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="50dp"
+                app:cardElevation="3dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true"
+                app:contentPadding="10dp">
 
-            <ImageButton
-                android:id="@+id/imageButton4"
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/fira_sans_extrabold"
+                        android:text="Transactions"
+                        android:textAlignment="center"
+                        android:textColor="@color/Blue"
+                        android:textSize="48sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:src="@drawable/pop" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/Add_Trans_Buttton"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:background="@color/white"
-                tools:src="@drawable/goal" />
+                android:fontFamily="@font/fira_sans_extrabold"
+                android:text="Add Transaction"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="28sp"
+                tools:text="Add Transaction" />
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/Goals_Card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="4"
+                android:clickable="true"
+                app:cardCornerRadius="50dp"
+                app:cardPreventCornerOverlap="true"
+                app:cardUseCompatPadding="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/fira_sans_extrabold"
+                        android:text="Goals"
+                        android:textAlignment="center"
+                        android:textColor="@color/Blue"
+                        android:textSize="48sp" />
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/goal" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/Add_Goals_Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/fira_sans_extrabold"
+                android:text="Add Goal"
+                android:textColor="@color/white"
+                android:textSize="28sp" />
         </LinearLayout>
+    </ScrollView>
 
-    </androidx.cardview.widget.CardView>
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:fontFamily="@font/fira_sans_extrabold"
-        android:text="Add Goal"
-        android:textColor="@color/white"
-        android:textSize="28sp" />
 
 </LinearLayout>
