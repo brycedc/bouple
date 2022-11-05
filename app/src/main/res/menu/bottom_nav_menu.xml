@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
 <!--    <item-->
 <!--        android:id="@+id/navigation_home"-->
@@ -8,22 +9,23 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:icon="@drawable/dashboard"
+        android:title="@string/title_dashboard"
+        app:showAsAction="never" />
 
     <item
         android:id="@+id/navigation_transactions"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/transactions_dash"
         android:title="@string/title_transactions" />
 
     <item
         android:id="@+id/navigation_goals"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/goals_dash"
         android:title="@string/title_goals" />
 
     <item
         android:id="@+id/navigation_reports"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/reports_dash"
         android:title="@string/title_reports" />
 
 </menu>
