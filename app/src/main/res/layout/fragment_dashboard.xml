@@ -25,7 +25,7 @@
         android:textSize="70sp" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/Transactions_Card"
+        android:id="@+id/transactions_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
@@ -78,7 +78,7 @@
         tools:text="Add Transaction" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/Goals_Card"
+        android:id="@+id/goals_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="2"
