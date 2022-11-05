@@ -14,4 +14,20 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="table_layout_4_open">Income</string>
+    <string name="table_layout_4_open_shortcut">$100</string>
+    <string name="table_layout_4_save">Expenditures</string>
+    <string name="table_layout_4_save_shortcut">$1000</string>
+    <string name="income_title">Income</string>
+    <string name="income_title_value">$0</string>
+    <string name="income_value">$0</string>
+    <string name="expenditures_title">Expenditures</string>
+    <string name="expenditures_value">$0</string>
+    <string name="savings_title">Savings</string>
+    <string name="savings_value">$0</string>
+    <string name="total_title">Total</string>
+    <string name="total_value">$0</string>
+    <string name="title_transactions">Transactions</string>
+    <string name="title_goals">Goals</string>
+    <string name="title_reports">Reports</string>
 </resources>
