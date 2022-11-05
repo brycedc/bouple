@@ -66,7 +66,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/rounded_corner_white"
         android:fontFamily="@font/fira_sans_extrabold"
         android:text="@string/add_transaction"
         android:textAlignment="center"
@@ -117,7 +117,7 @@
         android:textAllCaps="false"
         android:text="Add Goal"
         android:textColor="@color/Blue"
-        android:background="@drawable/rounded_corner"
+        android:background="@drawable/rounded_corner_white"
         android:textSize="28sp" />
 
 

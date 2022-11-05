@@ -1,9 +1,11 @@
 package com.example.couplesbudgeting.ui.dashboard;
 
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,7 +21,10 @@ import android.widget.Button;
 import android.widget.PopupWindow;
 
 import com.example.couplesbudgeting.R;
+import com.example.couplesbudgeting.ui.dialogs.AddGoalBottomDialogFragment;
+import com.example.couplesbudgeting.ui.dialogs.AddTransactionBottomDialogFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 public class DashboardFragment extends Fragment implements View.OnClickListener {
 
@@ -66,10 +71,16 @@ public class DashboardFragment extends Fragment implements View.OnClickListener 
                 navView.setSelectedItemId(R.id.navigation_goals);
                 break;
             case R.id.add_trans_button:
-
+                AddTransactionBottomDialogFragment addTransactionBottomDialogFragment =
+                        AddTransactionBottomDialogFragment.newInstance();
+                addTransactionBottomDialogFragment.show(
+                        getParentFragmentManager(),"add transaction");
                 break;
             case R.id.add_goal_button:
-
+                AddGoalBottomDialogFragment addGoalBottomDialogFragment =
+                        AddGoalBottomDialogFragment.newInstance();
+                addGoalBottomDialogFragment.show(
+                        getParentFragmentManager(), "add goal");
                 break;
         }
     }
