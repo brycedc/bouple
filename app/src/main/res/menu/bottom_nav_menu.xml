@@ -9,23 +9,22 @@
 
     <item
         android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/dashboard"
-        android:title="@string/title_dashboard"
-        app:showAsAction="never" />
+        android:icon="@drawable/dashboard_icon"
+        android:title="@string/title_dashboard" />
 
     <item
         android:id="@+id/navigation_transactions"
-        android:icon="@drawable/transactions_dash"
+        android:icon="@drawable/transaction_icon"
         android:title="@string/title_transactions" />
 
     <item
         android:id="@+id/navigation_goals"
-        android:icon="@drawable/goals_dash"
+        android:icon="@drawable/goal_icon"
         android:title="@string/title_goals" />
 
     <item
         android:id="@+id/navigation_reports"
-        android:icon="@drawable/reports_dash"
+        android:icon="@drawable/report_icon"
         android:title="@string/title_reports" />
 
 </menu>
