@@ -1,13 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.reports.ReportsFragment">
-
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".ui.reports.ReportsFragment"/>-->
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:stretchColumns="1">
+<TableRow>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:text="@string/income_title"
+        android:padding="3dip" />
+    <TextView
+        android:text="@string/income_value"
+        android:gravity="right"
+        android:padding="3dip" />
+</TableRow>
 
-</FrameLayout>
+<TableRow>
+    <TextView
+        android:text="@string/expenditures_title"
+        android:padding="3dip" />
+    <TextView
+        android:text="@string/expenditures_value"
+        android:gravity="right"
+        android:padding="3dip" />
+</TableRow>
+<TableRow>
+    <TextView
+        android:text="@string/savings_title"
+        android:padding="3dip" />
+    <TextView
+        android:text="@string/savings_value"
+        android:gravity="right"
+        android:padding="3dip" />
+</TableRow>
+<TableRow>
+    <TextView
+        android:text="@string/total_title"
+        android:padding="3dip" />
+    <TextView
+        android:text="@string/total_value"
+        android:gravity="right"
+        android:padding="3dip" />
+</TableRow>
+</TableLayout>
+
