@@ -2,6 +2,7 @@ package com.example.couplesbudgeting.services;
 
 
 import com.example.couplesbudgeting.models.Transaction;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Date;
 
@@ -12,7 +13,7 @@ public class TransactionsService {
 
     private final FirebaseFirestore db;
 
-    public void TransactionService() {
+    public TransactionsService() {
         db = FirebaseFirestore.getInstance();
     }
 
