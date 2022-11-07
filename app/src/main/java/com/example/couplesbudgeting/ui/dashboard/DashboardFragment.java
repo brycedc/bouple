@@ -1,20 +1,32 @@
 package com.example.couplesbudgeting.ui.dashboard;
 
+import androidx.cardview.widget.CardView;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.PopupWindow;
 
 import com.example.couplesbudgeting.R;
+import com.example.couplesbudgeting.ui.dialogs.AddGoalBottomDialogFragment;
+import com.example.couplesbudgeting.ui.dialogs.AddTransactionBottomDialogFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class DashboardFragment extends Fragment {
+public class DashboardFragment extends Fragment implements View.OnClickListener {
 
     private DashboardViewModel mViewModel;
 
@@ -25,7 +37,20 @@ public class DashboardFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_dashboard, container, false);
+        View view = inflater.inflate(R.layout.fragment_dashboard, container, false);
+
+        // Sets up card navigation
+        CardView nav_to_transaction = view.findViewById(R.id.transactions_card);
+        CardView nav_to_goals = view.findViewById(R.id.goals_card);
+        nav_to_transaction.setOnClickListener(this);
+        nav_to_goals.setOnClickListener(this);
+
+        // Sets up popup windows
+        Button add_transaction = view.findViewById(R.id.add_trans_button);
+        Button add_goal = view.findViewById(R.id.add_goal_button);
+        add_transaction.setOnClickListener(this);
+        add_goal.setOnClickListener(this);
+        return view;
     }
 
     @Override
@@ -34,5 +59,31 @@ public class DashboardFragment extends Fragment {
         mViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
         // TODO: Use the ViewModel
     }
+
+    @Override
+    public void onClick(View view) {
+        BottomNavigationView navView = getActivity().findViewById(R.id.nav_view);
+        switch(view.getId()) {
+            case R.id.transactions_card:
+                navView.setSelectedItemId(R.id.navigation_transactions);
+                break;
+            case R.id.goals_card:
+                navView.setSelectedItemId(R.id.navigation_goals);
+                break;
+            case R.id.add_trans_button:
+                AddTransactionBottomDialogFragment addTransactionBottomDialogFragment =
+                        AddTransactionBottomDialogFragment.newInstance();
+                addTransactionBottomDialogFragment.show(
+                        getParentFragmentManager(),"add transaction");
+                break;
+            case R.id.add_goal_button:
+                AddGoalBottomDialogFragment addGoalBottomDialogFragment =
+                        AddGoalBottomDialogFragment.newInstance();
+                addGoalBottomDialogFragment.show(
+                        getParentFragmentManager(), "add goal");
+                break;
+        }
+    }
+
 
 }
