@@ -1,2 +1,2 @@
 # CoupleBudget
-Couple budgetting app
+Couple budgeting app
