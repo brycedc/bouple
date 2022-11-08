@@ -35,4 +35,5 @@
     <string name="add_transaction">Add Transaction</string>
     <string name="report_page_title">Reports</string>
     <string name="reports_page_timeframe">Monthly Report</string>
+    <string name="search_transactions">Search Transactions</string>
 </resources>
