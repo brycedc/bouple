@@ -7,4 +7,7 @@
     <color name="Timber_Wolf">#D9D3CC</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="Turquoise">#2BFFE3</color>
+    <color name="Cyan">#2B6EFF</color>
+    <color name="Red">#E84E4A</color>
 </resources>
