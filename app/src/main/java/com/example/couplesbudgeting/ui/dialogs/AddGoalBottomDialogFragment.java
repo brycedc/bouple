@@ -4,13 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 
 import com.example.couplesbudgeting.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-public class AddGoalBottomDialogFragment extends BottomSheetDialogFragment {
+public class AddGoalBottomDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener {
     public static AddGoalBottomDialogFragment newInstance() {
         return new AddGoalBottomDialogFragment();
     }
@@ -24,9 +25,21 @@ public class AddGoalBottomDialogFragment extends BottomSheetDialogFragment {
         View view = inflater.inflate(R.layout.dialog_add_goal, container,
                 false);
 
+        Button add_goal = view.findViewById(R.id.add_item_popup_button);
+        add_goal.setOnClickListener(this);
+
         // get the views and attach the listener
 
         return view;
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.add_item_popup_button:
+                //TODO: Send information from popup to firebase, close popup.
+                break;
+        }
     }
 }

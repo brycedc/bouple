@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Transaction Name" />
+        android:hint="Transaction Name" />
 
     <EditText
         android:id="@+id/editTextNumberDecimal"
@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="Amount" />
+        android:hint="Amount" />
 
     <EditText
         android:id="@+id/editTextTextPersonName4"
@@ -51,7 +51,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Type" />
+        android:hint="Type" />
 
     <EditText
         android:id="@+id/editTextDate"
@@ -59,10 +59,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="date"
-        android:text="Date" />
+        android:hint="Date" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
+        android:id="@+id/add_item_popup_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
