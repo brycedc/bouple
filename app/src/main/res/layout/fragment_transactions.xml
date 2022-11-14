@@ -147,6 +147,178 @@
 
         </TableRow>
 
+        <TableRow
+            android:layout_marginBottom="10dip"
+            android:background="@drawable/rounded_corner_white"
+            android:paddingHorizontal="15dip"
+            android:layout_width="match_parent">
+
+            <GridLayout
+                android:columnCount="3"
+                android:rowCount="2"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:text="Transaction Name"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <Space
+                    >
+                </Space>
+
+                <TextView
+                    android:text="-$5.00"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <TextView
+                    android:text="Transaction Category"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <Space
+                    android:layout_height="wrap_content">
+                </Space>
+
+                <TextView
+                    android:text="$200.00"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+            </GridLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dip"
+            android:background="@drawable/rounded_corner_white"
+            android:paddingHorizontal="15dip"
+            android:layout_width="match_parent">
+
+            <GridLayout
+                android:columnCount="3"
+                android:rowCount="2"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:text="Transaction Name"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <Space
+                    >
+                </Space>
+
+                <TextView
+                    android:text="-$5.00"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <TextView
+                    android:text="Transaction Category"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <Space
+                    android:layout_height="wrap_content">
+                </Space>
+
+                <TextView
+                    android:text="$200.00"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+            </GridLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dip"
+            android:background="@drawable/rounded_corner_white"
+            android:paddingHorizontal="15dip"
+            android:layout_width="match_parent">
+
+            <GridLayout
+                android:columnCount="3"
+                android:rowCount="2"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:text="Transaction Name"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <Space
+                    >
+                </Space>
+
+                <TextView
+                    android:text="-$5.00"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <TextView
+                    android:text="Transaction Category"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <Space
+                    android:layout_height="wrap_content">
+                </Space>
+
+                <TextView
+                    android:text="$200.00"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+            </GridLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginBottom="10dip"
+            android:background="@drawable/rounded_corner_white"
+            android:paddingHorizontal="15dip"
+            android:layout_width="match_parent">
+
+            <GridLayout
+                android:columnCount="3"
+                android:rowCount="2"
+                android:layout_width="match_parent">
+
+                <TextView
+                    android:text="Transaction Name"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <Space
+                    >
+                </Space>
+
+                <TextView
+                    android:text="-$5.00"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <TextView
+                    android:text="Transaction Category"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+                <Space
+                    android:layout_height="wrap_content">
+                </Space>
+
+                <TextView
+                    android:text="$200.00"
+                    android:textColor="@color/black"
+                    android:padding="3dip"/>
+
+            </GridLayout>
+
+        </TableRow>
+
     </TableLayout>
 
 </LinearLayout>
