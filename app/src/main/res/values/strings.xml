@@ -34,4 +34,8 @@
     <string name="transactions">Transactions</string>
     <string name="add_transaction">Add Transaction</string>
     <string name="search_transactions">Search Transactions</string>
+    <string name="report_page_title">Reports</string>
+    <string name="reports_page_timeframe">Monthly Report</string>
+    <string name="goals_page_title">Goals</string>
+    <string name="add_goal">Add Goal</string>
 </resources>

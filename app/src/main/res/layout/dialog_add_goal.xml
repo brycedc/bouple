@@ -37,7 +37,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Goal Name" />
+        android:hint="Goal Name" />
 
     <EditText
         android:id="@+id/editTextNumberDecimal2"
@@ -46,7 +46,7 @@
         android:layout_weight="1"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:text="Target Savings ($)" />
+        android:hint="Target Savings ($)" />
 
     <EditText
         android:id="@+id/editTextDate2"
@@ -55,16 +55,16 @@
         android:layout_weight="1"
         android:ems="10"
         android:inputType="date"
-        android:text="End Date (Optional)" />
+        android:hint="End Date (Optional)" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button"
+        android:id="@+id/add_item_popup_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rounded_corner_blue"
         android:fontFamily="@font/fira_sans_extrabold"
-        android:layout_marginTop="10dp"
-        android:text="Add Goal"
+        android:text="@string/add_goal"
         android:textColor="@color/white"
         android:textSize="18dp" />
 </LinearLayout>
