@@ -22,6 +22,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginStart="100dp"
             android:layout_marginEnd="100dp"
+            android:layout_marginTop="20dp"
             android:layout_marginBottom="630dp"
             android:text="@string/bouple"
             android:textAlignment="center"
@@ -40,7 +41,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="360dp"
-            android:background="@drawable/rounded_corner"
+            android:background="@drawable/rounded_corner_log_in"
             android:ems="10"
             android:hint="@string/prompt_email"
             android:inputType="textEmailAddress"
@@ -58,7 +59,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="245dp"
-            android:background="@drawable/rounded_corner"
+            android:background="@drawable/rounded_corner_log_in"
             android:ems="10"
             android:hint="@string/prompt_password"
             android:inputType="textPassword"
@@ -73,20 +74,18 @@
             android:layout_alignParentBottom="true"
             android:layout_marginEnd="0dp"
             android:layout_marginBottom="45dp"
-            android:orientation="vertical"
-            android:padding="10dp">
+            android:orientation="vertical">
 
             <FrameLayout
                 android:id="@+id/loginButtonFrame"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center">
 
                 <ImageView
                     android:layout_width="350dp"
-                    android:layout_height="75dp"
-                    android:background="@drawable/popsicle_button"
-                    android:textColor="@color/colorSchemeWhite"
+                    android:layout_height="90dp"
+                    android:background="@drawable/login_popsicle_button"
                     android:textSize="20dp" />
 
                 <TextView
@@ -95,7 +94,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="10dp"
                     android:background="@color/transparent"
-                    android:text="LogIn"
+                    android:text="@string/login"
                     android:textColor="@color/black"
                     android:textSize="25dp"
                     android:textStyle="bold" />

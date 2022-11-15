@@ -78,4 +78,8 @@ public class UsersService {
     public boolean LogInUser(User user) {
         return true;
     }
+
+    public boolean RegisterUser(User user) {
+        return true;
+    }
 }

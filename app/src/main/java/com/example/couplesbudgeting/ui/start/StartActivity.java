@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import com.example.couplesbudgeting.R;
 import com.example.couplesbudgeting.ui.start.login.LogInFragment;
+import com.example.couplesbudgeting.ui.start.startPage.StartFragment;
 
 public class StartActivity extends AppCompatActivity {
 
@@ -17,7 +18,7 @@ public class StartActivity extends AppCompatActivity {
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .replace(R.id.startFragmentContainer, LogInFragment.class, null)
+                .replace(R.id.startFragmentContainer, StartFragment.class, null)
                 .setReorderingAllowed(true)
                 .addToBackStack(null)
                 .commit();
