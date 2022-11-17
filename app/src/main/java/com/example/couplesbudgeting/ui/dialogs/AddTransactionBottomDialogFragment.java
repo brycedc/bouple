@@ -1,25 +1,69 @@
 package com.example.couplesbudgeting.ui.dialogs;
 
+import android.app.DatePickerDialog;
+import android.icu.util.Calendar;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
 import com.example.couplesbudgeting.R;
+import com.example.couplesbudgeting.services.TransactionsService;
+import com.example.couplesbudgeting.ui.watchers.MoneyTextWatcher;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
+
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener {
 
-    String[] categories = {"Rent", "Utilities", "Entertainment", "Groceries", "Savings", "Transfer"};
+    private final String[] categories = {"Income", "Expense"};
+    private Button add_transaction;
+    private EditText transaction_name;
+    private EditText dateEdt;
+    private EditText amount;
+    private AutoCompleteTextView autoCompleteText;
 
     public static AddTransactionBottomDialogFragment newInstance() {
         return new AddTransactionBottomDialogFragment();
     }
+
+    private TextWatcher watcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable editable) {
+            if(dateEdt.getText().toString().length() > 0 &&
+                    transaction_name.getText().toString().length() > 0 &&
+                    amount.getText().toString().length() > 0 &&
+                    autoCompleteText.getText().toString().length() > 0
+            ) {
+                add_transaction.setEnabled(true);
+            }
+            else {
+                add_transaction.setEnabled(false);
+            }
+        }
+    };
 
     @Nullable
     @Override
@@ -31,14 +75,26 @@ public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragmen
                 false);
 
 
-        AutoCompleteTextView autoCompleteText = view.findViewById(R.id.auto_complete_transactions);
+        autoCompleteText = view.findViewById(R.id.auto_complete_transactions);
         ArrayAdapter<String> adapterItems = new ArrayAdapter<String>(view.getContext(), R.layout.list_item, categories);
         autoCompleteText.setAdapter(adapterItems);
 
+        // Sets up text fields
+        dateEdt = view.findViewById(R.id.date);
+        transaction_name = view.findViewById(R.id.transaction_name);
+        amount = view.findViewById(R.id.amount);
+
+        // Adds textChangedListener to convert to us currency
+        amount.addTextChangedListener(new MoneyTextWatcher(amount));
+        dateEdt.addTextChangedListener(watcher);
 
         // Sets up button
-        Button add_goal = view.findViewById(R.id.add_item_popup_button);
-        add_goal.setOnClickListener(this);
+        add_transaction = view.findViewById(R.id.add_item_popup_button);
+        add_transaction.setEnabled(false);
+
+        // Sets the OnClickListener
+        add_transaction.setOnClickListener(this);
+        dateEdt.setOnClickListener(this);
 
         return view;
 
@@ -48,8 +104,40 @@ public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragmen
     public void onClick(View view) {
         switch(view.getId()) {
             case R.id.add_item_popup_button:
-                //TODO: Send information from popup to firebase, close popup.
+
+                // Creates a date object from the date field
+                DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                Date date = null;
+                try {
+                    date = formatter.parse(dateEdt.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+
+                // Creates a new transaction
+                new TransactionsService().createTransaction(
+                        getContext(),
+                        transaction_name.getText().toString(),
+                        autoCompleteText.getText().toString(),
+                        amount.getText().toString(),
+                        date);
                 break;
+            case R.id.date:
+                final Calendar c = Calendar.getInstance();
+
+                // on below line we are getting
+                // our day, month and year.
+                int year = c.get(Calendar.YEAR);
+                int month = c.get(Calendar.MONTH);
+                int day = c.get(Calendar.DAY_OF_MONTH);
+
+                // on below line we are creating a variable for date picker dialog.
+                DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                        (view1, year1, monthOfYear, dayOfMonth) -> {
+                            // on below line we are setting date to our edit text.
+                            dateEdt.setText((monthOfYear + 1) + "/" + dayOfMonth + "/" + year1);
+                        }, year, month, day);
+                datePickerDialog.show();
         }
     }
 }
