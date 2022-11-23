@@ -17,8 +17,8 @@ public class TransactionsService {
         db = FirebaseFirestore.getInstance();
     }
 
-    public void createTransaction(String name, String category, Double amount, Date state) {
-        Transaction newTransaction = new Transaction(name, category, amount, state);
+    public void createTransaction(Transaction newTransaction) {
+
     }
 
     public Transaction getTransaction() {
@@ -26,16 +26,7 @@ public class TransactionsService {
         return new Transaction();
     }
 
-    public void updateTransaction(int transactionID) {
-        //Get Transaction to update
-        //Transaction transactionToUpdate = //Call to DB
-
-        //Update object
-//        transactionToUpdate.setName();
-//        transactionToUpdate.setCategory();
-//        transactionToUpdate.setAmount();
-//        transactionToUpdate.setDate();
-
+    public void updateTransaction(Transaction transactionToUpdate) {
         //Update DB
 
     }
