@@ -1,13 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Linear_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Blue"
+    android:orientation="vertical"
+    android:paddingHorizontal="30dp"
+    android:paddingBottom="15dp"
     tools:context=".ui.dashboard.DashboardFragment">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fira_sans_extrabold"
+        android:layout_marginBottom="20dp"
+        android:text="@string/bouple"
+        android:textAlignment="center"
+        android:textColor="@color/Dark_Pistachio"
+        android:textSize="70sp" />
 
-</FrameLayout>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/transactions_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:clickable="true"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="50dp"
+        app:cardElevation="3dp"
+        app:contentPadding="10dp"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/fira_sans_extrabold"
+                android:text="@string/transactions"
+                android:textAlignment="center"
+                android:textColor="@color/Blue"
+                android:textSize="48sp" />
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:src="@drawable/pop" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_trans_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/rounded_corner_white"
+        android:fontFamily="@font/fira_sans_extrabold"
+        android:text="@string/add_transaction"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/Blue"
+        android:textSize="28sp"
+        tools:text="Add Transaction" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/goals_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:clickable="true"
+        app:cardCornerRadius="50dp"
+        android:focusable="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/fira_sans_extrabold"
+                android:text="Goals"
+                android:textAlignment="center"
+                android:textColor="@color/Blue"
+                android:textSize="48sp" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/goal_icon" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/add_goal_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fira_sans_extrabold"
+        android:layout_marginTop="20dp"
+        android:textAllCaps="false"
+        android:text="Add Goal"
+        android:textColor="@color/Blue"
+        android:background="@drawable/rounded_corner_white"
+        android:textSize="28sp" />
+
+
+</LinearLayout>

@@ -11,10 +11,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.couplesbudgeting.R;
+import com.example.couplesbudgeting.ui.dialogs.AddGoalBottomDialogFragment;
+import com.example.couplesbudgeting.ui.dialogs.AddTransactionBottomDialogFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class GoalsFragment extends Fragment {
+public class GoalsFragment extends Fragment implements View.OnClickListener {
 
     private GoalsViewModel mViewModel;
 
@@ -25,7 +29,13 @@ public class GoalsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_goals, container, false);
+        View view = inflater.inflate(R.layout.fragment_goals, container, false);
+
+        // Sets up popup windows
+        Button add_goal = view.findViewById(R.id.add_goal_button_goals_fragment);
+        add_goal.setOnClickListener(this);
+
+        return view;
     }
 
     @Override
@@ -35,4 +45,15 @@ public class GoalsFragment extends Fragment {
         // TODO: Use the ViewModel
     }
 
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.add_goal_button_goals_fragment:
+                AddGoalBottomDialogFragment addGoalBottomDialogFragment =
+                        AddGoalBottomDialogFragment.newInstance();
+                addGoalBottomDialogFragment.show(
+                        getParentFragmentManager(), "add goal");
+                break;
+        }
+    }
 }

@@ -1,13 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<!--<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"-->
+<!--    xmlns:tools="http://schemas.android.com/tools"-->
+<!--    android:layout_width="match_parent"-->
+<!--    android:layout_height="match_parent"-->
+<!--    tools:context=".ui.reports.ReportsFragment"/>-->
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.reports.ReportsFragment">
+    android:background="@color/Blue"
+    android:orientation="vertical"
+    android:paddingHorizontal="30dp"
+    android:paddingBottom="15dp"
+    android:stretchColumns="1">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fira_sans_extrabold"
+        android:layout_marginBottom="20dp"
+        android:text="@string/report_page_title"
+        android:textAlignment="center"
+        android:textColor="@color/Dark_Pistachio"
+        android:textSize="70sp" />
 
-</FrameLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/fira_sans_extrabold"
+        android:layout_marginBottom="20dp"
+        android:text="@string/reports_page_timeframe"
+        android:textAlignment="center"
+        android:textColor="@color/Dark_Pistachio"
+        android:textSize="25sp" />
+
+<TableRow
+    android:layout_marginBottom="10dip"
+    android:background="@drawable/rounded_corner_white">
+    <TextView
+        android:text="@string/income_title"
+        android:background="@drawable/rounded_corner_white"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:padding="3dip" />
+    <TextView
+        android:text="@string/income_value"
+        android:gravity="center"
+        android:textColor="@color/Cyan"
+        android:padding="3dip" />
+</TableRow>
+
+<TableRow
+    android:layout_marginBottom="10dip"
+    android:background="@drawable/rounded_corner_white">
+
+    <TextView
+        android:layout_width="118dp"
+        android:background="@drawable/rounded_corner_white"
+        android:gravity="center"
+        android:padding="3dip"
+        android:text="@string/expenditures_title"
+        android:textColor="@color/black" />
+    <TextView
+        android:text="@string/expenditures_value"
+        android:gravity="center"
+        android:textColor="@color/Cyan"
+        android:padding="3dip" />
+</TableRow>
+<TableRow
+    android:layout_marginBottom="10dip"
+    android:background="@drawable/rounded_corner_white">
+    <TextView
+        android:text="@string/savings_title"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:padding="3dip" />
+    <TextView
+        android:text="@string/savings_value"
+        android:gravity="center"
+        android:textColor="@color/Cyan"
+        android:padding="3dip" />
+</TableRow>
+<TableRow
+    android:layout_marginBottom="10dip"
+    android:background="@drawable/rounded_corner_white">
+    <TextView
+        android:text="@string/total_title"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:padding="3dip" />
+    <TextView
+        android:text="@string/total_value"
+        android:gravity="center"
+        android:textColor="@color/Cyan"
+        android:padding="3dip" />
+</TableRow>
+</TableLayout>
+
