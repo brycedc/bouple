@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.start.register.RegisterFragment">
+    tools:context=".ui.start.register.RegisterFragment"
+    android:background="@color/Blue">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -24,9 +25,10 @@
             android:layout_marginBottom="630dp"
             android:text="@string/bouple"
             android:textAlignment="center"
-            android:textColor="@color/colorSchemeLightPistachio"
+            android:textColor="@color/Light_Pistachio"
             android:textSize="60sp"
             android:textStyle="bold"
+            android:fontFamily="@font/fira_sans_extrabold"
             android:visibility="visible" />
 
         <EditText

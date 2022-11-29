@@ -65,7 +65,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     private void navigateToLoginFragment() {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.startFragmentContainer, LogInFragment.class, null)
+                .replace(R.id.startFragmentContainer, LogInFragment.class, null)
                 .setReorderingAllowed(true)
                 .addToBackStack(null)
                 .commit();
@@ -74,7 +74,7 @@ public class StartFragment extends Fragment implements View.OnClickListener {
     private void navigateToRegisterFragment() {
         FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .add(R.id.startFragmentContainer, RegisterFragment.class, null)
+                .replace(R.id.startFragmentContainer, RegisterFragment.class, null)
                 .setReorderingAllowed(true)
                 .addToBackStack(null)
                 .commit();
