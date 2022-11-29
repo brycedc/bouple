@@ -11,4 +11,6 @@
     <color name="Cyan">#2B6EFF</color>
     <color name="Red">#E84E4A</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="Green">#50C878</color>
+    <color name="Grey">#7A7A7A</color>
 </resources>
