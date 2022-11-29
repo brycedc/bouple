@@ -38,4 +38,6 @@
     <string name="reports_page_timeframe">Monthly Report</string>
     <string name="goals_page_title">Goals</string>
     <string name="add_goal">Add Goal</string>
+    <string name="login">LogIn</string>
+    <string name="sign_up">Sign Up</string>
 </resources>
