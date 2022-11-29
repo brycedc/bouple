@@ -11,7 +11,6 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 
 import com.example.couplesbudgeting.R;
-import com.example.couplesbudgeting.services.TransactionsService;
 import com.example.couplesbudgeting.ui.transactions.TransactionsViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
@@ -29,9 +28,6 @@ public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragmen
     private EditText amount;
     private EditText date;
 
-import java.util.Date;
-
-public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener {
     public static AddTransactionBottomDialogFragment newInstance() {
         return new AddTransactionBottomDialogFragment();
     }
