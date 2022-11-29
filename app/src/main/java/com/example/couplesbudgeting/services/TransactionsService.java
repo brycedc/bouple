@@ -29,15 +29,14 @@ public class TransactionsService {
         db = FirebaseFirestore.getInstance();
     }
 
-    public void createTransaction(String name, String category, Double amount, Date date) {
-//        Transaction newTransaction = new Transaction(name, category, amount, date);
+    public void createTransaction(Transaction newTransaction) {
         Cache cache = Cache.getInstance();
 
         Map<String, Object> transaction = new HashMap<>();
-        transaction.put("name", name);
-        transaction.put("category", category);
-        transaction.put("amount", amount);
-        transaction.put("date", date);
+        transaction.put("name", newTransaction.getName());
+        transaction.put("category", newTransaction.getCategory());
+        transaction.put("amount", newTransaction.getAmount());
+        transaction.put("date", newTransaction.getDate());
         transaction.put("user_id", cache.getUserId());
         transaction.put("group_id", cache.getGroupId());
 
@@ -62,16 +61,7 @@ public class TransactionsService {
         return new Transaction();
     }
 
-    public void updateTransaction(int transactionID) {
-        //Get Transaction to update
-        //Transaction transactionToUpdate = //Call to DB
-
-        //Update object
-//        transactionToUpdate.setName();
-//        transactionToUpdate.setCategory();
-//        transactionToUpdate.setAmount();
-//        transactionToUpdate.setDate();
-
+    public void updateTransaction(Transaction transactionToUpdate) {
         //Update DB
 
     }

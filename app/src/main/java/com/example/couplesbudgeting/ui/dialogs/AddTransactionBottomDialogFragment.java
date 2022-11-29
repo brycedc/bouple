@@ -1,6 +1,7 @@
 package com.example.couplesbudgeting.ui.dialogs;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,20 +11,26 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 
 import com.example.couplesbudgeting.R;
-import com.example.couplesbudgeting.services.TransactionsService;
+import com.example.couplesbudgeting.ui.transactions.TransactionsViewModel;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
-import java.util.Date;
+import org.w3c.dom.Text;
 
-public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener {
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
+public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragment {
+    private static TransactionsViewModel mViewModel = new TransactionsViewModel();
+    private EditText trans_Name;
+    private EditText category;
+    private EditText amount;
+    private EditText date;
+
     public static AddTransactionBottomDialogFragment newInstance() {
         return new AddTransactionBottomDialogFragment();
     }
-
-    EditText amount;
-    EditText transactionName;
-    EditText transactionType;
-    EditText date;
 
     @Nullable
     @Override
@@ -34,36 +41,42 @@ public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragmen
         View view = inflater.inflate(R.layout.dialog_add_transaction, container,
                 false);
 
-        Button add_goal = view.findViewById(R.id.add_item_popup_button);
-        add_goal.setOnClickListener(this);
+        trans_Name = view.findViewById(R.id.editTextTransName);
+        category = view.findViewById(R.id.editTextCategory);
+        amount = view.findViewById(R.id.editTextAmount);
+        date = view.findViewById(R.id.editTextDate);
+        Button add_transaction = view.findViewById(R.id.add_item_popup_button);
+        add_transaction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Editable amountEditable = amount.getText();
+                String amountStr = amountEditable.toString();
+                Double amountDouble = Double.parseDouble(amountStr);
+                SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+                Date dateDate = null;
+                try {
+                    dateDate = formatter.parse(date.getText().toString());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                mViewModel.createTransaction(trans_Name.getText().toString(), category.getText().toString(), amountDouble, dateDate);
 
-        // get the views and attach the listener
-
-        amount = (EditText)view.findViewById(R.id.newTransactionAmount);
-        transactionName = (EditText)view.findViewById(R.id.newTransactionName);
-        transactionType = (EditText) view.findViewById(R.id.newTransactionType);
-        date = (EditText) view.findViewById(R.id.newTransactionDate);
+                getParentFragmentManager().beginTransaction().remove(AddTransactionBottomDialogFragment.this).commit();
+            }
+        });
 
         return view;
 
     }
-
-    @Override
-    public void onClick(View view) {
-        switch(view.getId()) {
-            case R.id.add_item_popup_button:
-                //TODO: Send information from popup to firebase, close popup.
-
-                System.out.println(amount.getText().toString());
-
-                TransactionsService transactionsService = new TransactionsService();
-
-                transactionsService.createTransaction(transactionName.getText().toString(),
-                        transactionType.getText().toString(), Double.parseDouble(amount.getText().toString()),
-                        new Date());
-
-
-                break;
-        }
-    }
 }
+
+
+
+
+
+
+
+
+
+
+
