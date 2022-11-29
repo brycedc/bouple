@@ -10,8 +10,8 @@ import java.util.Date;
 public class TransactionsViewModel extends ViewModel {
     TransactionsService transactionsService = new TransactionsService();
 
-    public void createTransaction(String name, String category, Double amount, Date state) {
-        Transaction newTransaction = new Transaction(name, category, amount, state);
+    public void createTransaction(String name, String category, Double amount, Date date) {
+        Transaction newTransaction = new Transaction(name, category, amount, date);
         transactionsService.createTransaction(newTransaction);
     }
 
@@ -19,7 +19,7 @@ public class TransactionsViewModel extends ViewModel {
         return transactionsService.getTransaction();
     }
 
-    public void updateTransaction(String name, String category, Double amount, Date state) {
+    public void updateTransaction(String name, String category, Double amount, Date date) {
         //Get Transaction to update
         Transaction transactionToUpdate = transactionsService.getTransaction();
 
@@ -27,7 +27,7 @@ public class TransactionsViewModel extends ViewModel {
         transactionToUpdate.setName(name);
         transactionToUpdate.setCategory(category);
         transactionToUpdate.setAmount(amount);
-        transactionToUpdate.setDate(state);
+        transactionToUpdate.setDate(date);
 
         //Update DB
         transactionsService.updateTransaction(transactionToUpdate);

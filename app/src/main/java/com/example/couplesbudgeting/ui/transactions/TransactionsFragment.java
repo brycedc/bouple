@@ -17,7 +17,7 @@ import com.example.couplesbudgeting.R;
 import com.example.couplesbudgeting.ui.dialogs.AddGoalBottomDialogFragment;
 import com.example.couplesbudgeting.ui.dialogs.AddTransactionBottomDialogFragment;
 
-public class TransactionsFragment extends Fragment implements View.OnClickListener {
+public class TransactionsFragment extends Fragment {
 
     private TransactionsViewModel mViewModel;
 
@@ -31,8 +31,17 @@ public class TransactionsFragment extends Fragment implements View.OnClickListen
         View view = inflater.inflate(R.layout.fragment_transactions, container, false);
 
         // Sets up popup windows
-        Button add_goal = view.findViewById(R.id.add_trans_button_trans_fragment);
-        add_goal.setOnClickListener(this);
+        Button add_trans = view.findViewById(R.id.add_trans_button_trans_fragment);
+        add_trans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddTransactionBottomDialogFragment addTransactionBottomDialogFragment =
+                        AddTransactionBottomDialogFragment.newInstance();
+                addTransactionBottomDialogFragment.show(
+                        getParentFragmentManager(), "add transaction");
+
+            }
+        });
 
         return view;
     }
@@ -42,18 +51,6 @@ public class TransactionsFragment extends Fragment implements View.OnClickListen
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(TransactionsViewModel.class);
         // TODO: Use the ViewModel
-    }
-
-    @Override
-    public void onClick(View view) {
-        switch(view.getId()) {
-            case R.id.add_trans_button_trans_fragment:
-                AddTransactionBottomDialogFragment addTransactionBottomDialogFragment =
-                        AddTransactionBottomDialogFragment.newInstance();
-                addTransactionBottomDialogFragment.show(
-                        getParentFragmentManager(), "add transaction");
-                break;
-        }
     }
 
 }
