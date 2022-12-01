@@ -31,16 +31,15 @@
     </LinearLayout>
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/goal_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint="Goal Name" />
 
     <EditText
-        android:id="@+id/editTextNumberDecimal2"
+        android:id="@+id/goal_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -49,11 +48,15 @@
         android:hint="Target Savings ($)" />
 
     <EditText
-        android:id="@+id/editTextDate2"
+        android:id="@+id/goal_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:ems="10"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:inputType="date"
         android:hint="End Date (Optional)" />
 

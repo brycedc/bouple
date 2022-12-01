@@ -41,21 +41,6 @@ public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragmen
         return new AddTransactionBottomDialogFragment();
     }
 
-    private TextWatcher watcher = new TextWatcher() {
-        @Override
-        public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-        }
-
-        @Override
-        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        }
-
-        @Override
-        public void afterTextChanged(Editable editable) {
-        }
-    };
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -77,7 +62,6 @@ public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragmen
 
         // Adds textChangedListener to convert to us currency
         amount.addTextChangedListener(new MoneyTextWatcher(amount));
-        dateEdt.addTextChangedListener(watcher);
 
         // Sets up button
         add_transaction = view.findViewById(R.id.add_item_popup_button);
@@ -138,6 +122,7 @@ public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragmen
                             dateEdt.setText((monthOfYear + 1) + "/" + dayOfMonth + "/" + year1);
                         }, year, month, day);
                 datePickerDialog.show();
+                break;
         }
     }
 }
