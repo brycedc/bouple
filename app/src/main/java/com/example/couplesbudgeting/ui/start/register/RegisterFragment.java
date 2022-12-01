@@ -20,14 +20,24 @@ import android.widget.Toast;
 
 import com.example.couplesbudgeting.MainActivity;
 import com.example.couplesbudgeting.R;
+import com.example.couplesbudgeting.cache.Cache;
 import com.example.couplesbudgeting.models.User;
 import com.example.couplesbudgeting.services.UsersService;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     private RegisterViewModel mViewModel;
 
     private User registerUser;
+    private View view;
+
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
 
     public static RegisterFragment newInstance() {
         return new RegisterFragment();
@@ -36,7 +46,10 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_register, container, false);
+        view = inflater.inflate(R.layout.fragment_register, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
 
         //Initialize User
         registerUser = new User();
@@ -102,19 +115,37 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     }
 
     private void attemptRegister() {
-        UsersService usersService = new UsersService();
-        boolean registerResult = usersService.RegisterUser(registerUser);
-        if (registerResult) {
-            Toast.makeText(getActivity(), "Log In successful!", Toast.LENGTH_SHORT).show();
-            launchMainActivity();
-        }
-        else {
-            Toast.makeText(getActivity(), "Log In failed!", Toast.LENGTH_SHORT).show();
-        }
+
+        mAuth.createUserWithEmailAndPassword(registerUser.getEmailAddress(), registerUser.getPassword()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    UsersService usersService = new UsersService();
+                    usersService.AddUser(registerUser);
+
+                    Cache cache = Cache.getInstance();
+                    cache.setEmail(registerUser.getEmailAddress());
+                    cache.setGroupId(null);
+
+                    Toast.makeText(getActivity(), "Register successful!", Toast.LENGTH_SHORT).show();
+                    launchMainActivity();
+                }
+                else {
+                    Toast.makeText(getActivity(), "Log In failed!", Toast.LENGTH_SHORT).show();
+                    try {
+                        System.out.println(task.getResult());
+                    } catch(Exception exception) {
+                        System.out.println(exception);
+                    }
+                }
+            }
+        });
+
     }
 
     private void launchMainActivity() {
         Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
 

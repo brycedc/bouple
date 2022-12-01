@@ -6,11 +6,15 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.couplesbudgeting.cache.Cache;
 import com.example.couplesbudgeting.models.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -26,19 +30,18 @@ public class UsersService {
 
     private final FirebaseFirestore db;
 
+
     public UsersService() {
          db = FirebaseFirestore.getInstance();
     }
 
-    // Not actually working yet. Just foundations
-    public void AddUser() {
+    public void AddUser(User newUser) {
         System.out.println("Adding user");
 
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
-        user.put("first", "Ada");
-        user.put("last", "Lovelace");
-        user.put("born", 1815);
+        user.put("email", newUser.getEmailAddress());
+        user.put("group_id", null);
 
         // Add a new document with a generated ID
         db.collection("users")
@@ -57,15 +60,25 @@ public class UsersService {
                 });
     }
 
-    public void GetUser() {
+    public void GetUser(String emailAddress) {
         System.out.println("Getting user");
         db.collection("users")
+                .whereEqualTo("email", emailAddress)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
+                                Cache cache = Cache.getInstance();
+                                cache.setEmail(emailAddress);
+                                if (document.getData().get("group_id") != null) {
+                                    cache.setGroupId(document.getData().get("group_id").toString());
+                                }
+                                else {
+                                    cache.setGroupId(null);
+                                }
+
                                 Log.d(TAG, document.getId() + " => " + document.getData());
                             }
                         } else {
@@ -75,11 +88,4 @@ public class UsersService {
                 });
     }
 
-    public boolean LogInUser(User user) {
-        return true;
-    }
-
-    public boolean RegisterUser(User user) {
-        return true;
-    }
 }
