@@ -37,7 +37,7 @@ public class TransactionsService {
         transaction.put("category", newTransaction.getCategory());
         transaction.put("amount", newTransaction.getAmount());
         transaction.put("date", newTransaction.getDate());
-        transaction.put("user_id", cache.getUserId());
+        transaction.put("email", cache.getEmail());
         transaction.put("group_id", cache.getGroupId());
 
         db.collection("transactions")
@@ -61,12 +61,22 @@ public class TransactionsService {
         return new Transaction();
     }
 
-    public void updateTransaction(Transaction transactionToUpdate) {
-        //Update DB
+    public void updateTransaction(String transactionId, Transaction updatedTransaction) {
+        Cache cache = Cache.getInstance();
+
+        Map<String, Object> transaction = new HashMap<>();
+        transaction.put("name", updatedTransaction.getName());
+        transaction.put("category", updatedTransaction.getCategory());
+        transaction.put("amount", updatedTransaction.getAmount());
+        transaction.put("date", updatedTransaction.getDate());
+        transaction.put("email", cache.getEmail());
+        transaction.put("group_id", cache.getGroupId());
+
+        db.collection("transactions").document(transactionId).update(transaction);
 
     }
 
-    public void deleteTransaction(int transactionID) {
-
+    public void deleteTransaction(String transactionId) {
+        db.collection("transactions").document(transactionId).delete();
     }
 }

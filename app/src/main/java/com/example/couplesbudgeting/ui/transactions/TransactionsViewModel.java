@@ -30,10 +30,10 @@ public class TransactionsViewModel extends ViewModel {
         transactionToUpdate.setDate(date);
 
         //Update DB
-        transactionsService.updateTransaction(transactionToUpdate);
+        transactionsService.updateTransaction("", transactionToUpdate);
     }
 
-    public void deleteTransaction(int transactionID) {
+    public void deleteTransaction(String transactionID) {
         transactionsService.deleteTransaction(transactionID);
     }
 }
