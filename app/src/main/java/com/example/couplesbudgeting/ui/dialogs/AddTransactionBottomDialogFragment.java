@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 import com.example.couplesbudgeting.R;
+import com.example.couplesbudgeting.models.Transaction;
 import com.example.couplesbudgeting.services.TransactionsService;
 import com.example.couplesbudgeting.ui.watchers.MoneyTextWatcher;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
@@ -52,16 +53,6 @@ public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragmen
 
         @Override
         public void afterTextChanged(Editable editable) {
-            if(dateEdt.getText().toString().length() > 0 &&
-                    transaction_name.getText().toString().length() > 0 &&
-                    amount.getText().toString().length() > 0 &&
-                    autoCompleteText.getText().toString().length() > 0
-            ) {
-                add_transaction.setEnabled(true);
-            }
-            else {
-                add_transaction.setEnabled(false);
-            }
         }
     };
 
@@ -90,7 +81,6 @@ public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragmen
 
         // Sets up button
         add_transaction = view.findViewById(R.id.add_item_popup_button);
-        add_transaction.setEnabled(false);
 
         // Sets the OnClickListener
         add_transaction.setOnClickListener(this);
@@ -105,22 +95,32 @@ public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragmen
         switch(view.getId()) {
             case R.id.add_item_popup_button:
 
-                // Creates a date object from the date field
-                DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-                Date date = null;
-                try {
-                    date = formatter.parse(dateEdt.getText().toString());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
+                // Checks that all the fields are populated
+                if(dateEdt.getText().toString().length() > 0 &&
+                        transaction_name.getText().toString().length() > 0 &&
+                        amount.getText().toString().length() > 0 &&
+                        autoCompleteText.getText().toString().length() > 0
+                ) {
+                    // Creates a date object from the date field
+                    DateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+                    Date date = null;
+                    try {
+                        date = formatter.parse(dateEdt.getText().toString());
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
 
-                // Creates a new transaction
-                new TransactionsService().createTransaction(
-                        getContext(),
-                        transaction_name.getText().toString(),
-                        autoCompleteText.getText().toString(),
-                        amount.getText().toString(),
-                        date);
+                    // Creates a new transaction
+                    String name = transaction_name.getText().toString();
+                    String category = autoCompleteText.getText().toString();
+                    Double price = Double.parseDouble(amount.getText().toString().substring(1));
+                    Transaction newTransaction = new Transaction(name, category, price, date);
+                    new TransactionsService().createTransaction(newTransaction);
+                    this.dismiss();
+                }
+                else {
+                    Toast.makeText(getContext(),"Please populate all fields", Toast.LENGTH_SHORT).show();
+                }
                 break;
             case R.id.date:
                 final Calendar c = Calendar.getInstance();

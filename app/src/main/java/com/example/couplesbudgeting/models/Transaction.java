@@ -8,13 +8,13 @@ import java.util.Date;
 public class Transaction {
     private String name;
     private String category;
-    private String amount;
+    private Double amount;
     private Date date;
 
     public Transaction() {
     }
 
-    public Transaction(String name, String category, String amount, Date date) {
+    public Transaction(String name, String category, Double amount, Date date) {
         this.name = name;
         this.category = category;
         this.amount = amount;
@@ -37,11 +37,11 @@ public class Transaction {
         this.category = category;
     }
 
-    public String getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

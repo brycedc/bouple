@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:hint="Amount" />
+        android:hint="@string/amount" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/type"
@@ -68,7 +68,7 @@
         android:focusable="false"
         android:focusableInTouchMode="false"
         android:inputType="date"
-        android:hint="Date" />
+        android:hint="@string/date" />
 
 
     <androidx.appcompat.widget.AppCompatButton
