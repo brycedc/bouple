@@ -8,12 +8,22 @@ public class Goal {
     private double amount;
     private double completed;
     private Date deadline;
+    private boolean isComplete;
 
     public Goal(String name, double amount, double completed, Date deadline) {
         this.name = name;
         this.amount = amount;
         this.completed = completed;
         this.deadline = deadline;
+        this.isComplete = false;
+    }
+
+    public Goal(String name, double amount, double completed, Date deadline, boolean isComplete) {
+        this.name = name;
+        this.amount = amount;
+        this.completed = completed;
+        this.deadline = deadline;
+        this.isComplete = isComplete;
     }
 
     public String getName() {
@@ -46,5 +56,13 @@ public class Goal {
 
     public void setDeadline(Date deadline) {
         this.deadline = deadline;
+    }
+
+    public boolean isComplete() {
+        return isComplete;
+    }
+
+    public void setComplete(boolean complete) {
+        isComplete = complete;
     }
 }

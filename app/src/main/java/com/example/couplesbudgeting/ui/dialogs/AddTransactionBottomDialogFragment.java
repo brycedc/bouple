@@ -97,7 +97,11 @@ public class AddTransactionBottomDialogFragment extends BottomSheetDialogFragmen
                     // Creates a new transaction
                     String name = transaction_name.getText().toString();
                     String category = autoCompleteText.getText().toString();
-                    Double price = Double.parseDouble(amount.getText().toString().substring(1));
+
+                    String moneyAmount = amount.getText().toString().substring(1);
+                    String withoutCommas = moneyAmount.replace(",", "");
+
+                    Double price = Double.parseDouble(withoutCommas);
                     Transaction newTransaction = new Transaction(name, category, price, date);
                     new TransactionsService().createTransaction(newTransaction);
                     this.dismiss();

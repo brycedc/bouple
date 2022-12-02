@@ -80,7 +80,11 @@ public class AddGoalBottomDialogFragment extends BottomSheetDialogFragment imple
 
                     //Creates a new goal
                     String name = goal_name.getText().toString();
-                    Double price = Double.parseDouble(amount.getText().toString().substring(1));
+
+                    String moneyAmount = amount.getText().toString().substring(1);
+                    String withoutCommas = moneyAmount.replace(",", "");
+
+                    double price = Double.parseDouble(withoutCommas);
                     Goal newGoal = new Goal(name, price, 0, date);
                     new GoalsService().createGoal(newGoal);
                     this.dismiss();
