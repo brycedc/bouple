@@ -37,7 +37,7 @@ public class TransactionsService {
         transaction.put("category", newTransaction.getCategory());
         transaction.put("amount", newTransaction.getAmount());
         transaction.put("date", newTransaction.getDate());
-        transaction.put("email", cache.getEmail());
+        transaction.put("user_id", cache.getUserId());
         transaction.put("group_id", cache.getGroupId());
 
         db.collection("transactions")
@@ -70,7 +70,7 @@ public class TransactionsService {
         transaction.put("amount", updatedTransaction.getAmount());
         transaction.put("date", updatedTransaction.getDate());
         transaction.put("email", cache.getEmail());
-        transaction.put("group_id", cache.getGroupId());
+        transaction.put("user_id", cache.getUserId());
 
         db.collection("transactions").document(transactionId).update(transaction);
 

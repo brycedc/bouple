@@ -122,6 +122,8 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                     UsersService usersService = new UsersService();
                     usersService.GetUser(logInUser.getEmailAddress());
 
+                    System.out.println(task.getResult());
+
                     Toast.makeText(getActivity(), "Log In successful!", Toast.LENGTH_SHORT).show();
                     launchMainActivity();
                 }

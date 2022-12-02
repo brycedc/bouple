@@ -32,7 +32,7 @@
     <string name="title_reports">Reports</string>
     <string name="bouple">Bouple</string>
     <string name="transactions">Transactions</string>
-    <string name="add_transaction">+ Add Transaction</string>
+    <string name="add_transaction">Add Transaction</string>
     <string name="search_transactions">Search Transactions</string>
     <string name="report_page_title">Reports</string>
     <string name="reports_page_timeframe">Monthly Report</string>
@@ -40,4 +40,7 @@
     <string name="add_goal">Add Goal</string>
     <string name="login">LogIn</string>
     <string name="sign_up">Sign Up</string>
+    <string name="type">Type</string>
+    <string name="amount">Amount</string>
+    <string name="date">Date</string>
 </resources>

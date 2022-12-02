@@ -32,11 +32,11 @@ public class GroupsService {
         Cache cache = Cache.getInstance();
 
         ArrayList<String> users = new ArrayList<>();
-        users.add(cache.getEmail());
+        users.add(cache.getUserId());
 
         Map<String, Object> group = new HashMap<>();
         group.put("access_code", accessCode);
-        group.put("owner", cache.getEmail());
+        group.put("owner", cache.getUserId());
         group.put("users", users);
 
         db.collection("groups")
@@ -55,8 +55,8 @@ public class GroupsService {
                 });
     }
 
-    public void AddUserToGroup(String groupId, String newUserEmail) {
-        db.collection("groups").document(groupId).update("users", FieldValue.arrayUnion(newUserEmail));
+    public void AddUserToGroup(String groupId, String newUserId) {
+        db.collection("groups").document(groupId).update("users", FieldValue.arrayUnion(newUserId));
     }
 
     public void DeleteGroup(String groupId) {

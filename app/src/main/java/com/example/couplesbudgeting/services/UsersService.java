@@ -71,7 +71,10 @@ public class UsersService {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
                                 Cache cache = Cache.getInstance();
+
                                 cache.setEmail(emailAddress);
+                                cache.setUserId(document.getId());
+
                                 if (document.getData().get("group_id") != null) {
                                     cache.setGroupId(document.getData().get("group_id").toString());
                                 }

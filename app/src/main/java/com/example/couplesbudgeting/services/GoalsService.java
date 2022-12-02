@@ -25,13 +25,23 @@ public class GoalsService {
         goal.put("name", newGoal.getName());
         goal.put("deadline", newGoal.getDeadline());
         goal.put("amount", newGoal.getAmount());
+        goal.put("is_complete", newGoal.isComplete());
         goal.put("completed", newGoal.getCompleted());
         goal.put("group_id", cache.getGroupId());
 
         db.collection("goals").add(goal);
     }
 
-    public void updateGoalCompleted(String goalId, double completed) {
-        db.collection("goals").document(goalId).update("completed", completed);
+    public void updateGoalCompleted(String goalId, Goal goal) {
+        Cache cache = Cache.getInstance();
+        Map<String, Object> newGoal = new HashMap<>();
+        newGoal.put("name", goal.getName());
+        newGoal.put("deadline", goal.getDeadline());
+        newGoal.put("amount", goal.getAmount());
+        newGoal.put("is_complete", goal.isComplete());
+        newGoal.put("completed", goal.getCompleted());
+        newGoal.put("group_id", cache.getGroupId());
+
+        db.collection("goals").document(goalId).update(newGoal);
     }
 }
