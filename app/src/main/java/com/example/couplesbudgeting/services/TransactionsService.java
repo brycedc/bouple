@@ -30,15 +30,7 @@ public class TransactionsService {
     }
 
     public void createTransaction(Transaction newTransaction) {
-        Cache cache = Cache.getInstance();
-
-        Map<String, Object> transaction = new HashMap<>();
-        transaction.put("name", newTransaction.getName());
-        transaction.put("category", newTransaction.getCategory());
-        transaction.put("amount", newTransaction.getAmount());
-        transaction.put("date", newTransaction.getDate());
-        transaction.put("user_id", cache.getUserId());
-        transaction.put("group_id", cache.getGroupId());
+        Map<String, Object> transaction = createTransactionMap(newTransaction);
 
         db.collection("transactions")
                 .add(transaction)
@@ -62,15 +54,7 @@ public class TransactionsService {
     }
 
     public void updateTransaction(String transactionId, Transaction updatedTransaction) {
-        Cache cache = Cache.getInstance();
-
-        Map<String, Object> transaction = new HashMap<>();
-        transaction.put("name", updatedTransaction.getName());
-        transaction.put("category", updatedTransaction.getCategory());
-        transaction.put("amount", updatedTransaction.getAmount());
-        transaction.put("date", updatedTransaction.getDate());
-        transaction.put("email", cache.getEmail());
-        transaction.put("user_id", cache.getUserId());
+        Map<String, Object> transaction = createTransactionMap(updatedTransaction);
 
         db.collection("transactions").document(transactionId).update(transaction);
 
@@ -78,5 +62,17 @@ public class TransactionsService {
 
     public void deleteTransaction(String transactionId) {
         db.collection("transactions").document(transactionId).delete();
+    }
+
+    private Map<String, Object> createTransactionMap(Transaction transaction) {
+        Cache cache = Cache.getInstance();
+        Map<String, Object> returnTransaction = new HashMap<>();
+        returnTransaction.put("name", transaction.getName());
+        returnTransaction.put("category", transaction.getCategory());
+        returnTransaction.put("amount", transaction.getAmount());
+        returnTransaction.put("date", transaction.getDate());
+        returnTransaction.put("user_id", cache.getUserId());
+        returnTransaction.put("group_id", cache.getGroupId());
+        return returnTransaction;
     }
 }
