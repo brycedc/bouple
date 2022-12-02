@@ -6,10 +6,10 @@ public class Goal {
 
     private String name;
     private double amount;
-    private boolean completed;
+    private double completed;
     private Date deadline;
 
-    public Goal(String name, double amount, boolean completed, Date deadline) {
+    public Goal(String name, double amount, double completed, Date deadline) {
         this.name = name;
         this.amount = amount;
         this.completed = completed;
@@ -32,11 +32,11 @@ public class Goal {
         this.amount = amount;
     }
 
-    public boolean getCompleted() {
+    public double getCompleted() {
         return completed;
     }
 
-    public void setCompleted(boolean completed) {
+    public void setCompleted(double completed) {
         this.completed = completed;
     }
 
