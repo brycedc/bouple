@@ -52,4 +52,10 @@ public class Transaction {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "{ Name: " + this.name + " Category: " + this.category + " Amount: " + this.amount.toString() +
+                " Date: " + this.date.toString() + " }";
+    }
 }
