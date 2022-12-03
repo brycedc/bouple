@@ -34,6 +34,8 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
 
     private User logInUser;
     private View view;
+    private EditText logInEmailText;
+    private EditText logInPasswordText;
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
@@ -58,7 +60,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
         logInFrame.setOnClickListener(this);
 
         //EditTexts
-        EditText logInEmailText = view.findViewById(R.id.logInEmailText);
+        logInEmailText = view.findViewById(R.id.logInEmailText);
         logInEmailText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -76,7 +78,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        EditText logInPasswordText = view.findViewById(R.id.logInPasswordText);
+        logInPasswordText = view.findViewById(R.id.logInPasswordText);
         logInPasswordText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -108,7 +110,13 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.loginButtonFrame:
-                attemptLogIn();
+                if(logInEmailText.getText().length() > 0 &&
+                logInPasswordText.getText().length() > 0) {
+                    attemptLogIn();
+                }
+                else {
+                    Toast.makeText(getActivity(), "Please populate all fields", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
