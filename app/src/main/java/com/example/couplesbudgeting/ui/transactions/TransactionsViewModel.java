@@ -6,6 +6,7 @@ import com.example.couplesbudgeting.models.Transaction;
 import com.example.couplesbudgeting.services.TransactionsService;
 
 import java.util.Date;
+import java.util.List;
 
 public class TransactionsViewModel extends ViewModel {
     TransactionsService transactionsService = new TransactionsService();
@@ -15,8 +16,8 @@ public class TransactionsViewModel extends ViewModel {
         transactionsService.createTransaction(newTransaction);
     }
 
-    public Transaction getTransaction() {
-        return transactionsService.getTransaction();
+    public List<Transaction> getAllUserTransactions() {
+        return transactionsService.getAllUserTransactions();
     }
 
     public void updateTransaction(String name, String category, Double amount, Date date) {

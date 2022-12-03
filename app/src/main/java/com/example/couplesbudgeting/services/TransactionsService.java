@@ -6,14 +6,22 @@ import static android.content.ContentValues.TAG;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.couplesbudgeting.cache.Cache;
 import com.example.couplesbudgeting.models.Transaction;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -55,6 +63,24 @@ public class TransactionsService {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+    }
+
+    public List<Transaction> getAllUserTransactions() {
+        List<Transaction> transactionList = new ArrayList<>();
+
+        db.collection("transactions")
+                .whereEqualTo("user_id", Cache.getInstance().getUserId())
+                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    List<DocumentSnapshot> snapshotList = task.getResult().getDocuments();
+                    for (DocumentSnapshot snapshot : snapshotList) {
+                        transactionList.add(snapshot.toObject(Transaction.class));
+                    }
+                }
+            });
+
+        return transactionList;
     }
 
     public Transaction getTransaction() {
