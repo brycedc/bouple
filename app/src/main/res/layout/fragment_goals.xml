@@ -29,4 +29,9 @@
         android:textAllCaps="false"
         android:textColor="@color/Blue"
         android:textSize="28sp" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recylcer_view_goals"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 </LinearLayout>
