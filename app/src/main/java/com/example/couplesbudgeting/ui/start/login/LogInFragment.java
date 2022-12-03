@@ -20,8 +20,10 @@ import android.widget.Toast;
 
 import com.example.couplesbudgeting.MainActivity;
 import com.example.couplesbudgeting.R;
+import com.example.couplesbudgeting.cache.Cache;
 import com.example.couplesbudgeting.models.User;
 import com.example.couplesbudgeting.services.UsersService;
+import com.example.couplesbudgeting.ui.groupID.GroupActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -147,4 +149,5 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
 }

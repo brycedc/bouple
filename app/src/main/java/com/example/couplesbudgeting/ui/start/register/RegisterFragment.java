@@ -21,6 +21,7 @@ import com.example.couplesbudgeting.R;
 import com.example.couplesbudgeting.cache.Cache;
 import com.example.couplesbudgeting.models.User;
 import com.example.couplesbudgeting.services.UsersService;
+import com.example.couplesbudgeting.ui.groupID.GroupActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -132,9 +133,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     Cache cache = Cache.getInstance();
                     cache.setEmail(registerUser.getEmailAddress());
                     cache.setGroupId(null);
-
+                    new UsersService().GetUser(registerUser.getEmailAddress());
                     Toast.makeText(getActivity(), "Register successful!", Toast.LENGTH_SHORT).show();
-                    launchMainActivity();
+                    launchGroupIDActivity();
                 }
                 else {
                     Toast.makeText(getActivity(), "Log In failed!", Toast.LENGTH_SHORT).show();
@@ -149,10 +150,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void launchMainActivity() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+    private void launchGroupIDActivity() {
+        Intent intent = new Intent(getActivity(), GroupActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
 }

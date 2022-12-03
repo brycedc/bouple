@@ -60,6 +60,14 @@ public class UsersService {
                 });
     }
 
+    public void updateGroupId(String groupid, String userid) {
+        Cache cache = Cache.getInstance();
+        Map<String, Object> user = new HashMap<>();
+        user.put("email", cache.getEmail());
+        user.put("group_id", cache.getGroupId());
+        db.collection("users").document(userid).update(user);
+    }
+
     public void GetUser(String emailAddress) {
         System.out.println("Getting user");
         db.collection("users")
