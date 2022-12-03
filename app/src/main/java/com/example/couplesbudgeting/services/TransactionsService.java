@@ -11,17 +11,26 @@ import com.example.couplesbudgeting.cache.Cache;
 import com.example.couplesbudgeting.models.Transaction;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Used to communicated with the Firebase Transactions table
  */
 public class TransactionsService {
+
+    public interface ITransactionsReturn {
+        void onSuccess(List<Transaction> transactions);
+    }
 
     private final FirebaseFirestore db;
 
@@ -53,6 +62,38 @@ public class TransactionsService {
         return new Transaction();
     }
 
+    /**
+     * Get all transactions between two dates
+     * @param earlyDate Date to start fetch
+     * @param lateDate Date to end fetch
+     * @param reportsTransactions Used to return the values
+     */
+    public void getTransactionInTimeframe(Date earlyDate, Date lateDate, ITransactionsReturn reportsTransactions) {
+        db.collection("transactions")
+                .whereEqualTo("group_id", Cache.getInstance().getGroupId())
+                .whereGreaterThan("date", earlyDate)
+                .whereLessThan("date", lateDate)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<Transaction> transactions = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            String name = document.getData().get("name").toString();
+                            String category = document.getData().get("category").toString();
+                            double amount = Double.parseDouble(document.getData().get("amount").toString());
+                            long milliseconds = Long.parseLong(document.getData().get("milliseconds").toString());
+
+                            Date date = new Date(milliseconds);
+
+                            Transaction newTransaction = new Transaction(name, category, amount, date);
+                            transactions.add(newTransaction);
+                        }
+                        reportsTransactions.onSuccess(transactions);
+                    }
+                });
+    }
+
     public void updateTransaction(String transactionId, Transaction updatedTransaction) {
         Map<String, Object> transaction = createTransactionMap(updatedTransaction);
 
@@ -71,6 +112,7 @@ public class TransactionsService {
         returnTransaction.put("category", transaction.getCategory());
         returnTransaction.put("amount", transaction.getAmount());
         returnTransaction.put("date", transaction.getDate());
+        returnTransaction.put("milliseconds", transaction.getDate().getTime());
         returnTransaction.put("user_id", cache.getUserId());
         returnTransaction.put("group_id", cache.getGroupId());
         return returnTransaction;

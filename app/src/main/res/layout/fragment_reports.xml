@@ -45,6 +45,7 @@
         android:padding="3dip" />
     <TextView
         android:text="@string/income_value"
+        android:id="@+id/reports_income_value"
         android:gravity="center"
         android:textColor="@color/Cyan"
         android:padding="3dip" />
@@ -63,6 +64,7 @@
         android:textColor="@color/black" />
     <TextView
         android:text="@string/expenditures_value"
+        android:id="@+id/reports_expenditures_value"
         android:gravity="center"
         android:textColor="@color/Cyan"
         android:padding="3dip" />
@@ -77,6 +79,7 @@
         android:padding="3dip" />
     <TextView
         android:text="@string/savings_value"
+        android:id="@+id/reports_savings_value"
         android:gravity="center"
         android:textColor="@color/Cyan"
         android:padding="3dip" />
@@ -91,6 +94,7 @@
         android:padding="3dip" />
     <TextView
         android:text="@string/total_value"
+        android:id="@+id/reports_total_value"
         android:gravity="center"
         android:textColor="@color/Cyan"
         android:padding="3dip" />
