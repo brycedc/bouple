@@ -47,15 +47,16 @@ public class TransactionsFragment extends Fragment {
         mViewModel.getAllUserTransactions(new TransactionsList());
 //        userTransactions.add(new Transaction("Test1", "Cat1", 20.00, new Date()));
 //        userTransactions.add(new Transaction("Test2", "Cat2", 20.00, new Date()));
-        recyclerView = view.findViewById(R.id.transactionRecyclerView);
 
+        //Set up recycler view
+        recyclerView = view.findViewById(R.id.transactionRecyclerView);
         TransactionsRecyclerViewAdapter adapter = new TransactionsRecyclerViewAdapter(userTransactions);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        // Sets up popup windows
+        // Sets up popup window
         Button add_trans = view.findViewById(R.id.add_trans_button_trans_fragment);
         add_trans.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +81,7 @@ public class TransactionsFragment extends Fragment {
     public class TransactionsList implements TransactionsService.ITransactionsReturn {
         @Override
         public void onSuccess(List<Transaction> transactions) {
+            System.out.println("Success!");
             userTransactions = transactions;
         }
     }

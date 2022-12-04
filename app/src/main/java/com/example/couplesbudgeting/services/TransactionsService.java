@@ -82,18 +82,6 @@ public class TransactionsService {
                         transactionsReturn.onSuccess(transactions);
                     }
                 });
-
-//                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                @Override
-//                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                    List<DocumentSnapshot> snapshotList = task.getResult().getDocuments();
-//                    for (DocumentSnapshot snapshot : snapshotList) {
-//                        transactionList.add(snapshot.toObject(Transaction.class));
-//                    }
-//                }
-//            });
-
-        //return transactionList;
     }
 
     public Transaction getTransaction() {
