@@ -1,14 +1,7 @@
 package com.example.couplesbudgeting.ui.start.register;
 
-import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -18,11 +11,17 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.couplesbudgeting.MainActivity;
 import com.example.couplesbudgeting.R;
 import com.example.couplesbudgeting.cache.Cache;
 import com.example.couplesbudgeting.models.User;
 import com.example.couplesbudgeting.services.UsersService;
+import com.example.couplesbudgeting.ui.groupID.GroupActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -35,6 +34,8 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     private User registerUser;
     private View view;
+    private EditText registerEmailText;
+    EditText registerPasswordText;
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
@@ -59,7 +60,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
         registerFrame.setOnClickListener(this);
 
         //EditTexts
-        EditText registerEmailText = view.findViewById(R.id.registerEmailText);
+        registerEmailText = view.findViewById(R.id.registerEmailText);
         registerEmailText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -77,7 +78,7 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        EditText registerPasswordText = view.findViewById(R.id.registerPasswordText);
+        registerPasswordText = view.findViewById(R.id.registerPasswordText);
         registerPasswordText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -109,7 +110,13 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.registerButtonFrame:
-                attemptRegister();
+                if(registerEmailText.getText().length() > 0 &&
+                registerPasswordText.getText().length() > 0) {
+                    attemptRegister();
+                }
+                else {
+                    Toast.makeText(getActivity(), "Please populate all fields", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -126,9 +133,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
                     Cache cache = Cache.getInstance();
                     cache.setEmail(registerUser.getEmailAddress());
                     cache.setGroupId(null);
-
+                    new UsersService().GetUser(registerUser.getEmailAddress());
                     Toast.makeText(getActivity(), "Register successful!", Toast.LENGTH_SHORT).show();
-                    launchMainActivity();
+                    launchGroupIDActivity();
                 }
                 else {
                     Toast.makeText(getActivity(), "Log In failed!", Toast.LENGTH_SHORT).show();
@@ -143,10 +150,9 @@ public class RegisterFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void launchMainActivity() {
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+    private void launchGroupIDActivity() {
+        Intent intent = new Intent(getActivity(), GroupActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
-
 }

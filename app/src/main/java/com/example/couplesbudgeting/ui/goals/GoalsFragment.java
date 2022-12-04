@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,13 +15,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.couplesbudgeting.R;
+import com.example.couplesbudgeting.cache.Cache;
+import com.example.couplesbudgeting.models.Goal;
+import com.example.couplesbudgeting.services.GoalsService;
 import com.example.couplesbudgeting.ui.dialogs.AddGoalBottomDialogFragment;
 import com.example.couplesbudgeting.ui.dialogs.AddTransactionBottomDialogFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.List;
+
 public class GoalsFragment extends Fragment implements View.OnClickListener {
 
     private GoalsViewModel mViewModel;
+    private RecyclerView recyclerView;
 
     public static GoalsFragment newInstance() {
         return new GoalsFragment();

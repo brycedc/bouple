@@ -20,8 +20,10 @@ import android.widget.Toast;
 
 import com.example.couplesbudgeting.MainActivity;
 import com.example.couplesbudgeting.R;
+import com.example.couplesbudgeting.cache.Cache;
 import com.example.couplesbudgeting.models.User;
 import com.example.couplesbudgeting.services.UsersService;
+import com.example.couplesbudgeting.ui.groupID.GroupActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -34,6 +36,8 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
 
     private User logInUser;
     private View view;
+    private EditText logInEmailText;
+    private EditText logInPasswordText;
 
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
@@ -58,7 +62,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
         logInFrame.setOnClickListener(this);
 
         //EditTexts
-        EditText logInEmailText = view.findViewById(R.id.logInEmailText);
+        logInEmailText = view.findViewById(R.id.logInEmailText);
         logInEmailText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -76,7 +80,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
             }
         });
 
-        EditText logInPasswordText = view.findViewById(R.id.logInPasswordText);
+        logInPasswordText = view.findViewById(R.id.logInPasswordText);
         logInPasswordText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -108,7 +112,13 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.loginButtonFrame:
-                attemptLogIn();
+                if(logInEmailText.getText().length() > 0 &&
+                logInPasswordText.getText().length() > 0) {
+                    attemptLogIn();
+                }
+                else {
+                    Toast.makeText(getActivity(), "Please populate all fields", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
@@ -139,4 +149,5 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
     }
+
 }
