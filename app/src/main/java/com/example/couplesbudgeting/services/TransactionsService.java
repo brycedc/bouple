@@ -84,6 +84,26 @@ public class TransactionsService {
                 });
     }
 
+    public List<Transaction> getAllUserTransactions() {
+        final List<Transaction>[] transactionList = new List[]{new ArrayList<>()};
+
+        db.collection("transactions")
+                .whereEqualTo("user_id", Cache.getInstance().getUserId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<Transaction> transactions = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            Transaction transaction = document.toObject(Transaction.class);
+                            transactions.add(transaction);
+                        }
+                        transactionList[0] = transactions;
+                    }
+                });
+        return transactionList[0];
+    }
+
     public Transaction getTransaction() {
 
         return new Transaction();

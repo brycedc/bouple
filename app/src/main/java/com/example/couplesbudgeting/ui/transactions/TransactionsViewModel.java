@@ -20,6 +20,10 @@ public class TransactionsViewModel extends ViewModel {
         transactionsService.getAllUserTransactions(transactionsReturn);
     }
 
+    public List<Transaction> getAllUserTransactions() {
+        return transactionsService.getAllUserTransactions();
+    }
+
     public void updateTransaction(String name, String category, Double amount, Date date) {
         //Get Transaction to update
         Transaction transactionToUpdate = transactionsService.getTransaction();
