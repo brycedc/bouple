@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.couplesbudgeting.R;
 import com.example.couplesbudgeting.models.Transaction;
+import com.example.couplesbudgeting.services.TransactionsService;
 import com.example.couplesbudgeting.ui.dialogs.AddGoalBottomDialogFragment;
 import com.example.couplesbudgeting.ui.dialogs.AddTransactionBottomDialogFragment;
 import com.google.type.DateTime;
@@ -43,7 +44,7 @@ public class TransactionsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_transactions, container, false);
         mViewModel = new TransactionsViewModel();
 
-        userTransactions = mViewModel.getAllUserTransactions();
+        mViewModel.getAllUserTransactions(new TransactionsList());
 //        userTransactions.add(new Transaction("Test1", "Cat1", 20.00, new Date()));
 //        userTransactions.add(new Transaction("Test2", "Cat2", 20.00, new Date()));
         recyclerView = view.findViewById(R.id.transactionRecyclerView);
@@ -74,6 +75,13 @@ public class TransactionsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(TransactionsViewModel.class);
         // TODO: Use the ViewModel
+    }
+
+    public class TransactionsList implements TransactionsService.ITransactionsReturn {
+        @Override
+        public void onSuccess(List<Transaction> transactions) {
+            userTransactions = transactions;
+        }
     }
 
     private class TransactionsRecyclerViewAdapter extends RecyclerView.Adapter<TransactionsRecyclerViewAdapter.ViewHolder> {
