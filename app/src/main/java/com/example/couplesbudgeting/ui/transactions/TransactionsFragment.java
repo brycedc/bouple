@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.couplesbudgeting.R;
 import com.example.couplesbudgeting.models.Transaction;
+import com.example.couplesbudgeting.services.TransactionsService;
 import com.example.couplesbudgeting.ui.dialogs.AddGoalBottomDialogFragment;
 import com.example.couplesbudgeting.ui.dialogs.AddTransactionBottomDialogFragment;
 import com.google.type.DateTime;
@@ -43,18 +44,19 @@ public class TransactionsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_transactions, container, false);
         mViewModel = new TransactionsViewModel();
 
-        userTransactions = mViewModel.getAllUserTransactions();
+        mViewModel.getAllUserTransactions(new TransactionsList());
 //        userTransactions.add(new Transaction("Test1", "Cat1", 20.00, new Date()));
 //        userTransactions.add(new Transaction("Test2", "Cat2", 20.00, new Date()));
-        recyclerView = view.findViewById(R.id.transactionRecyclerView);
 
+        //Set up recycler view
+        recyclerView = view.findViewById(R.id.transactionRecyclerView);
         TransactionsRecyclerViewAdapter adapter = new TransactionsRecyclerViewAdapter(userTransactions);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this.getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(adapter);
 
-        // Sets up popup windows
+        // Sets up popup window
         Button add_trans = view.findViewById(R.id.add_trans_button_trans_fragment);
         add_trans.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,6 +76,14 @@ public class TransactionsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = new ViewModelProvider(this).get(TransactionsViewModel.class);
         // TODO: Use the ViewModel
+    }
+
+    public class TransactionsList implements TransactionsService.ITransactionsReturn {
+        @Override
+        public void onSuccess(List<Transaction> transactions) {
+            System.out.println("Success!");
+            userTransactions = transactions;
+        }
     }
 
     private class TransactionsRecyclerViewAdapter extends RecyclerView.Adapter<TransactionsRecyclerViewAdapter.ViewHolder> {

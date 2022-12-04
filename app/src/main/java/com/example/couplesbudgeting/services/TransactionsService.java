@@ -65,22 +65,23 @@ public class TransactionsService {
                 });
     }
 
-    public List<Transaction> getAllUserTransactions() {
+    public void getAllUserTransactions(ITransactionsReturn transactionsReturn) {
         List<Transaction> transactionList = new ArrayList<>();
 
         db.collection("transactions")
                 .whereEqualTo("user_id", Cache.getInstance().getUserId())
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    List<DocumentSnapshot> snapshotList = task.getResult().getDocuments();
-                    for (DocumentSnapshot snapshot : snapshotList) {
-                        transactionList.add(snapshot.toObject(Transaction.class));
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<Transaction> transactions = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            Transaction transaction = document.toObject(Transaction.class);
+                            transactions.add(transaction);
+                        }
+                        transactionsReturn.onSuccess(transactions);
                     }
-                }
-            });
-
-        return transactionList;
+                });
     }
 
     public Transaction getTransaction() {
