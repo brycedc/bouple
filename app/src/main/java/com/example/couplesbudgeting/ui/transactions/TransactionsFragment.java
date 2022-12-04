@@ -66,6 +66,14 @@ public class TransactionsFragment extends Fragment {
             }
         });
 
+        Button refreshButton = view.findViewById(R.id.refreshButton);
+        add_trans.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mViewModel.getAllUserTransactions(new TransactionsList());
+            }
+        });
+
         return view;
     }
 

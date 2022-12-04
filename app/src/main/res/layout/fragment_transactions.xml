@@ -36,16 +36,33 @@
         android:textSize="28sp"
         tools:text="Add Transaction" />
 
-    <SearchView
-        android:id="@+id/search_bar"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rounded_corner_white"
-        android:queryHint="@string/search_transactions"
-        android:iconifiedByDefault="false"
-        android:layout_marginVertical="20dp"
-        >
-    </SearchView>
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/refreshButton"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/rounded_corner_white"
+            android:src="@drawable/refresh_icon"
+            />
+
+        <SearchView
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_corner_white"
+            android:queryHint="@string/search_transactions"
+            android:iconifiedByDefault="false"
+            android:layout_marginVertical="20dp"
+            >
+        </SearchView>
+    </LinearLayout>
 
 <!--    <TableLayout-->
 <!--        android:layout_width="match_parent"-->
