@@ -129,7 +129,15 @@ public class TransactionsFragment extends Fragment {
             String groupName = transactionList.get(position).getCategory();
             holder.groupName.setText(groupName);
             Double transAmount = transactionList.get(position).getAmount();
-            holder.transAmount.setText(transAmount.toString());
+            String category = transactionList.get(position).getCategory();
+            if (category.equals("Expense")) {
+                holder.transAmount.setText("- " + transAmount.toString());
+                holder.transAmount.setTextColor(getResources().getColor(R.color.Red));
+            }
+            else {
+                holder.transAmount.setText("+ " + transAmount.toString());
+                holder.transAmount.setTextColor(getResources().getColor(R.color.Green));
+            }
             //String balance = transactionList.get(position).get;
             holder.balance.setText("0.00");
         }
