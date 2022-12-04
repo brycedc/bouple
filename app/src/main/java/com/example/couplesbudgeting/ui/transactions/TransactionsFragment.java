@@ -44,8 +44,7 @@ public class TransactionsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_transactions, container, false);
         mViewModel = new TransactionsViewModel();
 
-        //mViewModel.getAllUserTransactions(new TransactionsList());
-        userTransactions = mViewModel.getAllUserTransactions();
+        mViewModel.getAllUserTransactions(new TransactionsList());
 
         //Set up recycler view
         recyclerView = view.findViewById(R.id.transactionRecyclerView);
