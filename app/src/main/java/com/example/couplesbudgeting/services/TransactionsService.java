@@ -71,7 +71,7 @@ public class TransactionsService {
 
         db.collection("transactions")
                 .whereEqualTo("user_id", Cache.getInstance().getUserId())
-                .orderBy("date", Query.Direction.ASCENDING)
+                .orderBy("date", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override

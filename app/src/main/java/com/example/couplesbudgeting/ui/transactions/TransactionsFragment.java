@@ -2,6 +2,7 @@ package com.example.couplesbudgeting.ui.transactions;
 
 import androidx.lifecycle.ViewModelProvider;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -31,6 +32,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class TransactionsFragment extends Fragment {
 
@@ -156,10 +158,11 @@ public class TransactionsFragment extends Fragment {
             return new ViewHolder(transactionView);
         }
 
+        @SuppressLint({"DefaultLocale", "SetTextI18n"})
         @Override
         public void onBindViewHolder(@NonNull TransactionsRecyclerViewAdapter.ViewHolder holder, int position) {
             if (holder.dateHeader != null) {
-                DateFormat dateFormat = new SimpleDateFormat("E, dd MMM yyyy");
+                DateFormat dateFormat = new SimpleDateFormat("E, dd MMM yyyy", Locale.US);
                 String date = dateFormat.format(transactionList.get(position).getDate());
                 holder.dateHeader.setText(date);
             }
@@ -170,11 +173,11 @@ public class TransactionsFragment extends Fragment {
             Double transAmount = transactionList.get(position).getAmount();
             String category = transactionList.get(position).getCategory();
             if (category.equals("Expense")) {
-                holder.transAmount.setText("- " + transAmount.toString());
+                holder.transAmount.setText("- " + String.format("%.2f", transAmount));
                 holder.transAmount.setTextColor(getResources().getColor(R.color.Red));
             }
             else {
-                holder.transAmount.setText("+ " + transAmount.toString());
+                holder.transAmount.setText("+ " + String.format("%.2f", transAmount));
                 holder.transAmount.setTextColor(getResources().getColor(R.color.Green));
             }
             //String balance = transactionList.get(position).get;
