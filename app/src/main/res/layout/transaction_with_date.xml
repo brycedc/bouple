@@ -4,25 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp"
     >
 
     <TextView
+        android:id="@+id/dateHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
+        android:layout_marginStart="20dp"
         android:text="@string/title_transactions"
-        android:textColor="@color/Blue"
-        />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/originalTrans"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/originalTrans"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner_table_white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateHeader">
 
         <TextView
             android:id="@+id/transactionName"
@@ -30,6 +33,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="2dp"
+            android:layout_marginStart="20dp"
             android:text="Transaction Name"
             app:layout_constraintBottom_toTopOf="@+id/transGroup"
             app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +45,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginStart="20dp"
             android:text="Group"
             android:textColor="@color/Grey"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -53,6 +58,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="2dp"
+            android:layout_marginEnd="20dp"
             android:text="Amount"
             app:layout_constraintBottom_toTopOf="@+id/balance"
             app:layout_constraintEnd_toEndOf="parent"
@@ -64,6 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
             android:layout_marginBottom="5dp"
+            android:layout_marginEnd="20dp"
             android:text="Balance"
             android:textColor="@color/Grey"
             app:layout_constraintBottom_toBottomOf="parent"

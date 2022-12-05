@@ -25,7 +25,10 @@ import com.example.couplesbudgeting.ui.dialogs.AddGoalBottomDialogFragment;
 import com.example.couplesbudgeting.ui.dialogs.AddTransactionBottomDialogFragment;
 import com.google.type.DateTime;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -94,14 +97,16 @@ public class TransactionsFragment extends Fragment {
         }
 
         private void groupByDate(List<Transaction> transactions) {
-            Date currentDate = null;
+            Date currentDate = new Date();
             for (Transaction transaction : transactions) {
-                if (transaction.getDate() != currentDate) {
+                if (transaction.getDate().compareTo(currentDate) != 0) {
                     transaction.setFirstOnDate(true);
                     currentDate = transaction.getDate();
                 }
+                else {
+                    transaction.setFirstOnDate(false);
+                }
             }
-            //return transactions;
         }
     }
 
@@ -118,9 +123,11 @@ public class TransactionsFragment extends Fragment {
             private TextView groupName;
             private TextView transAmount;
             private TextView balance;
+            private TextView dateHeader;
 
             public ViewHolder(View itemView) {
                 super(itemView);
+                dateHeader = itemView.findViewById(R.id.dateHeader);
                 transName = itemView.findViewById(R.id.transactionName);
                 groupName = itemView.findViewById(R.id.transGroup);
                 transAmount = itemView.findViewById(R.id.transAmount);
@@ -141,7 +148,7 @@ public class TransactionsFragment extends Fragment {
         public TransactionsRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
             View transactionView = null;
             if (viewType == 1) {
-                transactionView = LayoutInflater.from(parent.getContext()).inflate(R.layout.transaction, parent, false);
+                transactionView = LayoutInflater.from(parent.getContext()).inflate(R.layout.transaction_with_date, parent, false);
             }
             else {
                 transactionView = LayoutInflater.from(parent.getContext()).inflate(R.layout.transaction, parent, false);
@@ -151,6 +158,11 @@ public class TransactionsFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(@NonNull TransactionsRecyclerViewAdapter.ViewHolder holder, int position) {
+            if (holder.dateHeader != null) {
+                DateFormat dateFormat = new SimpleDateFormat("E, dd MMM yyyy");
+                String date = dateFormat.format(transactionList.get(position).getDate());
+                holder.dateHeader.setText(date);
+            }
             String transName = transactionList.get(position).getName();
             holder.transName.setText(transName);
             String groupName = transactionList.get(position).getCategory();
