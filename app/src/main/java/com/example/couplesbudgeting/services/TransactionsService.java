@@ -6,14 +6,23 @@ import static android.content.ContentValues.TAG;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.couplesbudgeting.cache.Cache;
 import com.example.couplesbudgeting.models.Transaction;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.Timestamp;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -55,6 +64,46 @@ public class TransactionsService {
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+    }
+
+    public void getAllUserTransactions(ITransactionsReturn transactionsReturn) {
+        List<Transaction> transactionList = new ArrayList<>();
+
+        db.collection("transactions")
+                .whereEqualTo("user_id", Cache.getInstance().getUserId())
+                .orderBy("date", Query.Direction.DESCENDING)
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<Transaction> transactions = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            Transaction transaction = document.toObject(Transaction.class);
+                            transactions.add(transaction);
+                        }
+                        transactionsReturn.onSuccess(transactions);
+                    }
+                });
+    }
+
+    public List<Transaction> getAllUserTransactions() {
+        final List<Transaction>[] transactionList = new List[]{new ArrayList<>()};
+
+        db.collection("transactions")
+                .whereEqualTo("user_id", Cache.getInstance().getUserId())
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        List<Transaction> transactions = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                            Transaction transaction = document.toObject(Transaction.class);
+                            transactions.add(transaction);
+                        }
+                        transactionList[0] = transactions;
+                    }
+                });
+        return transactionList[0];
     }
 
     public Transaction getTransaction() {
