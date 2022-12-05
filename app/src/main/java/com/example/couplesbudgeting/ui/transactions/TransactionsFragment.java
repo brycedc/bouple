@@ -84,11 +84,24 @@ public class TransactionsFragment extends Fragment {
     public class TransactionsList implements TransactionsService.ITransactionsReturn {
         @Override
         public void onSuccess(List<Transaction> transactions) {
+            groupByDate(transactions);
+
             TransactionsRecyclerViewAdapter adapter = new TransactionsRecyclerViewAdapter(transactions);
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setAdapter(adapter);
+        }
+
+        private void groupByDate(List<Transaction> transactions) {
+            Date currentDate = null;
+            for (Transaction transaction : transactions) {
+                if (transaction.getDate() != currentDate) {
+                    transaction.setFirstOnDate(true);
+                    currentDate = transaction.getDate();
+                }
+            }
+            //return transactions;
         }
     }
 
@@ -115,10 +128,24 @@ public class TransactionsFragment extends Fragment {
             }
         }
 
+        @Override
+        public int getItemViewType(int position) {
+            if (transactionList.get(position).isFirstOnDate()) {
+                return 1;
+            }
+            return 0;
+        }
+
         @NonNull
         @Override
         public TransactionsRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            View transactionView = LayoutInflater.from(parent.getContext()).inflate(R.layout.transaction, parent, false);
+            View transactionView = null;
+            if (viewType == 1) {
+                transactionView = LayoutInflater.from(parent.getContext()).inflate(R.layout.transaction, parent, false);
+            }
+            else {
+                transactionView = LayoutInflater.from(parent.getContext()).inflate(R.layout.transaction, parent, false);
+            }
             return new ViewHolder(transactionView);
         }
 

@@ -10,6 +10,7 @@ public class Transaction {
     private String category;
     private Double amount;
     private Date date;
+    private Boolean firstOnDate;
 
     public Transaction() {
     }
@@ -19,6 +20,15 @@ public class Transaction {
         this.category = category;
         this.amount = amount;
         this.date = date;
+        this.firstOnDate = false;
+    }
+
+    public Boolean isFirstOnDate() {
+        return firstOnDate;
+    }
+
+    public void setFirstOnDate(Boolean firstOnDate) {
+        this.firstOnDate = firstOnDate;
     }
 
     public String getName() {
