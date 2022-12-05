@@ -4,6 +4,7 @@ package com.example.couplesbudgeting.services;
 import static android.content.ContentValues.TAG;
 
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -70,7 +71,7 @@ public class TransactionsService {
         List<Transaction> transactionList = new ArrayList<>();
 
         db.collection("transactions")
-                .whereEqualTo("user_id", Cache.getInstance().getUserId())
+                .whereEqualTo("group_id", Cache.getInstance().getGroupId())
                 .orderBy("date", Query.Direction.DESCENDING)
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -90,7 +91,7 @@ public class TransactionsService {
         final List<Transaction>[] transactionList = new List[]{new ArrayList<>()};
 
         db.collection("transactions")
-                .whereEqualTo("user_id", Cache.getInstance().getUserId())
+                .whereEqualTo("group_id", Cache.getInstance().getGroupId())
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -101,6 +102,11 @@ public class TransactionsService {
                             transactions.add(transaction);
                         }
                         transactionList[0] = transactions;
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "Failed to get transaction");
                     }
                 });
         return transactionList[0];

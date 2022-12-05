@@ -135,6 +135,7 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
                     System.out.println(task.getResult());
 
                     Toast.makeText(getActivity(), "Log In successful!", Toast.LENGTH_SHORT).show();
+                    setCache(logInUser.getEmailAddress());
                     launchMainActivity();
                 }
                 else {
@@ -148,6 +149,10 @@ public class LogInFragment extends Fragment implements View.OnClickListener {
         Intent intent = new Intent(getActivity(), MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+    }
+
+    private void setCache(String email) {
+        new UsersService().GetUser(email);
     }
 
 }
