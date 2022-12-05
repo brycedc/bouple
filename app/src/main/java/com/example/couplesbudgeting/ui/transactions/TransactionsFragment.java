@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.couplesbudgeting.R;
@@ -62,8 +63,8 @@ public class TransactionsFragment extends Fragment {
             }
         });
 
-        Button refreshButton = view.findViewById(R.id.refreshButton);
-        add_trans.setOnClickListener(new View.OnClickListener() {
+        ImageButton refreshButton = view.findViewById(R.id.refreshButton);
+        refreshButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mViewModel.getAllUserTransactions(new TransactionsList());
